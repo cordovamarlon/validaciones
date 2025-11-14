@@ -56,12 +56,15 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
     <form action="" method="post">
         <label for="distancia">
             Distancia: 
-            <input type="number" name="distancia" id="distancia" required>
+            <input type="number" name="distancia" id="distancia" value="<?php echo htmlspecialchars($distancia_bien) ?? ''?>">
         </label>
+        <?php echo $errores ['distancia'] ?? '' ?>
         <label for="tiempo">
             Tiempo: 
-            <input type="number" name="minutos" id="minutos" required>
+            <input type="number" name="minutos" id="minutos" value="<?php echo htmlspecialchars($tiempo_bien) ?? '' ?> ">
+            
         </label>
+        <?php echo $errores ['tiempo'] ?? '' ?>
         <input type="submit" value="Enviar">
     </form>
     
