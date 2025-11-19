@@ -10,6 +10,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
 
 
+
     if(empty($nombre)){
         $errores['nombre'] = "El campo nombre no debe estar vacio";
     }elseif(!preg_match('/^[a-zA-Z0-9 ]{3,50}$/',$nombre)){
@@ -41,6 +42,24 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         $errores['telefono'] = "los digitos no pueden ser mayor de 10";
     }else{
         $telefono_bien = $telefono;
+    }
+    
+    if(empty($edad)){
+        $errores['edad'] = "el campo edad no puede estar vacio";
+    }elseif(filter_var($edad, FILTER_VALIDATE_INT) === false ){
+        $errores['edad'] = "la edad solo puede ser un numero entero";
+    }elseif($edad < 0 || $edad > 120){
+        $errores['edad'] = "La edad debe estar entre 0 y 120";
+    }
+
+    if(empty($errores)){
+        echo "el nombre es: $nombre";
+        echo "el correo es: $correo";
+        echo "la contraseña es: $contraseña";
+        echo "el telefono es: $telefono";
+        echo "la edad es : $edad";
+
+
     }
 
 
