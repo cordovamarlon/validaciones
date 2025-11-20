@@ -143,6 +143,8 @@
         <br>
         <input type="radio" name="satis" value="muy insatisfecho" <?php if(isset($satis_bien) && $satis_bien == 'muy insatisfecho') echo "checked"?>> Muy Insatisfecho
         <br>
+
+        
         <p>Tres aspectos a mejorar: </p>
         <?php echo $errores['mejorar'] ?? '' ?><br>
         <input type="checkbox" name="mejorar[]" value="atencion" <?php if(isset($mejorar_bien) && in_array("atencion",$mejorar_bien))echo "checked" ?>> Atención al Cliente
