@@ -26,12 +26,14 @@
         }
 
         //email
-        if($contacto != 'correo' && empty($email)){
-            $errores['email'] = "debes introducir un correo electronico";
-        }elseif(filter_var($email, FILTER_VALIDATE_EMAIL)=== false){
-            $errores['email'] = "necesitas un correo valido"; 
-        }else{
-            $email_bien = $email;
+        if ($contacto == 'correo'){
+            if (empty($email)){
+                $errores['email'] = "Debe ingresar un correo electronico";
+            }elseif(filter_var($email, FILTER_VALIDATE_EMAIL) === false){
+                $errores['email'] = "Formato de correo electronico invalidado";
+            }else{
+                $email_bien = $email;
+            }
         }
 
 
