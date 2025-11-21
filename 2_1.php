@@ -6,8 +6,8 @@
         $contacto = $_POST['contacto'];
         $email = filter_var($_POST['email'],FILTER_SANITIZE_EMAIL);
         $telefono = filter_var($_POST['telefono'],FILTER_SANITIZE_NUMBER_INT);
-        $satis = $_POST['satis'];
-        $mejorar = $_POST['mejorar'];
+        $satis = $_POST['satis'] ?? null;
+        $mejorar = $_POST['mejorar'] ?? null;
         
    
         if(empty($nombre)){
@@ -53,8 +53,11 @@
         //nivel de satisfacción
         $formas_satis = ['muy satisfecho','satisfecho','neutral','insatisfecho','muy insatisfecho'];
 
-        if(!in_array($satis,$formas_satis)){
-            $errores['satis']="debes elegir una opcion";
+        if(empty($satis)){
+            $errores['satis'] = "debes selecionar uno";
+            
+        }elseif(!in_array($satis,$formas_satis)){
+            $errores['satis']="opcion no";
         }else{
             $satis_bien = $satis;
         }

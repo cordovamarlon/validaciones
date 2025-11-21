@@ -4,7 +4,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $nombre = trim($_POST['nombre']);
     $correo = filter_var($_POST['correo'],FILTER_SANITIZE_EMAIL);
     $fecha = $_POST['fecha'];
-    $participacion = $_POST['participacion'];
+    $participacion = $_POST['participacion'] ?? null;
 //nombre
 
 if(empty($nombre)){
@@ -54,9 +54,9 @@ if(empty($participacion)){
 
 
 if(empty($errores)){
-        echo "nombre: $nombre_bien <br>";
-        echo "correo: $correo_bien <br>";
-        echo "fecha: $fecha_bien <br>";
+        echo "nombre: ".htmlspecialchars($nombre_bien)."<br>";
+        echo "correo: ".htmlspecialchars($correo_bien)."<br>";
+        echo "fecha: ".htmlspecialchars($fecha_bien)."<br>";
 }
     
 
