@@ -2,7 +2,10 @@
     $errores=[];
 if($_SERVER['REQUEST_METHOD']=='POST'){
     $nombre = trim($_POST['nombre']);
-
+    $correo = filter_var($_POST['correo'],FILTER_SANITIZE_EMAIL);
+    $fecha = $_POST['fecha'];
+    $participacion = $_POST['participacion'];
+//nombre
 
 if(empty($nombre)){
         $errores['nombre'] = "Este campo no puede estar vacio";
@@ -14,9 +17,47 @@ if(empty($nombre)){
     }
 
 
-    if(empty($errores)){
-        echo "nombre: $nombre_bien";
-    }
+//correo
+
+if(empty($correo)){
+    $errores['correo'] = "El campo no puede estar vacio";
+
+}elseif(filter_var($correo, FILTER_VALIDATE_EMAIL) === false ){
+    $errores['correo'] = "Formato no valido";
+
+}else{
+    $correo_bien = $correo;
+}
+
+
+//fecha
+
+if(empty($fecha)){
+    $errores['fecha'] = "No puede estar vacio";
+}elseif(!preg_match('/^\d{2}\/\d{2}\/\d{4}$/',$fecha)){
+    $errores['fecha'] = "formato no valido";
+}else{
+    $fecha_bien = $fecha;
+}
+
+//participacion
+
+$formas_participacion = ['asistente','ponente'];
+
+if(empty($participacion)){
+    $errores['participacion'] = "debes seleccionar un metodo";
+}elseif(!in_array($participacion,$formas_participacion)){
+    
+}
+
+
+
+
+if(empty($errores)){
+        echo "nombre: $nombre_bien <br>";
+        echo "correo: $correo_bien <br>";
+        echo "fecha: $fecha_bien <br>";
+}
     
 
 
@@ -42,11 +83,14 @@ if(empty($nombre)){
         </label><br>
         <label for="correo">
             Correo:
-            <input type="text" name="correo" id="correo">
+            <input type="text" name="correo" id="correo" value="<?php echo htmlspecialchars($correo_bien ?? '')?>">
+            <?php echo $errores['correo'] ?? '' ?>
         </label><br>
+        
         <label for="fecha">
             Fecha de nacimiento:
-            <input type="text" name="fecha" id="fecha">
+            <input type="text" name="fecha" id="fecha" value="<?php echo htmlspecialchars($fecha_bien ?? '')?>">
+            <?php echo $errores['fecha'] ?? '' ?>
         </label>
         <p>Tipo de participacion</p>
         <input type="radio" name="participacion" value="asistente"> Asistente <br>

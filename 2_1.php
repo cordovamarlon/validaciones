@@ -75,7 +75,7 @@
             echo "Nombre: $nombre_bien <br>";
             echo "Contacto: $contacto_bien <br>";
             echo "email: $email_bien<br>";
-            echo "telefono: $telefono_bien<br>";
+            echo "telefono: $telefono_bien";
             echo "nivel de satisfacción: $satis_bien<br>";
             echo "mejoras: $mejorar_bien";
         }
